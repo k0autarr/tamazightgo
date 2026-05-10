@@ -1,0 +1,176 @@
+.video {
+  position: relative;
+}
+
+.video__inner {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Background */
+.video__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.video__actual {
+  position: relative;
+  z-index: 1;          /* sits above the gradient fallback */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Fallback gradient — Moroccan landscape: night Atlas sky → terracotta → sand */
+.video__gradient-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;          /* stays behind the video */
+  background: linear-gradient(165deg,
+    #0D1F3A 0%,
+    #1A3A6E 15%,
+    #2B5A9A 28%,
+    #5A3A2A 48%,
+    #C8502A 62%,
+    #D4A017 78%,
+    #8B6040 90%,
+    #3A2010 100%
+  );
+}
+
+/* Dark overlay for text readability */
+.video__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,20,0.6) 0%,
+    rgba(10,10,20,0.4) 50%,
+    rgba(10,10,20,0.7) 100%
+  );
+}
+
+/* Tifinagh watermark */
+.video__watermark {
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  font-size: 8rem;
+  color: rgba(255,255,255,0.04);
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Content */
+.video__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 6rem 1rem 8rem;
+}
+
+.video__title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  color: var(--white);
+  line-height: 1.18;
+}
+
+.video__title em {
+  font-style: italic;
+  color: var(--primary-light);
+}
+
+.video__desc {
+  font-size: 1.125rem;
+  color: rgba(255,255,255,0.72);
+  max-width: 440px;
+  line-height: 1.7;
+}
+
+/* Play button */
+.video__play {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.video__play-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  animation: pulse-ring 2.5s ease-in-out infinite;
+}
+
+.video__play--active .video__play-ring {
+  animation: none;
+  border-color: var(--primary);
+}
+
+.video__play-inner {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  transition: all var(--transition);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.video__play:hover .video__play-inner {
+  transform: scale(1.08);
+  background: var(--primary);
+  color: var(--white);
+}
+
+.video__hint {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.02em;
+}
+
+/* Wave divider */
+.video__wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+}
+
+.video__wave svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .video__inner {
+    min-height: 460px;
+  }
+
+  .video__watermark {
+    font-size: 4rem;
+  }
+}

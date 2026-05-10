@@ -1,0 +1,25 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+}
+
+.app-layout__main {
+  flex: 1;
+  padding: 2.5rem 0 4rem;
+}
+
+.app-layout__footer {
+  background: var(--dark-warm);
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.app-layout__footer-brand {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

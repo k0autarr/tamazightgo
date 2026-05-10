@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import LandingPage from './pages/LandingPage';
+import DashboardPage from './pages/DashboardPage';
+import LessonsPage from './pages/LessonsPage';
+import LessonDetailPage from './pages/LessonDetailPage';
+import VocabularyPage from './pages/VocabularyPage';
+import ProgressPage from './pages/ProgressPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/lessons" element={<LessonsPage />} />
+        <Route path="/lessons/:id" element={<LessonDetailPage />} />
+        <Route path="/vocabulary" element={<VocabularyPage />} />
+        <Route path="/progress" element={<ProgressPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

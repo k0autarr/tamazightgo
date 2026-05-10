@@ -1,0 +1,301 @@
+.gallery {
+  background: var(--cream);
+  padding: var(--section-py) 0;
+}
+
+.gallery__header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 3.5rem;
+}
+
+.gallery__title {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  color: var(--dark);
+  line-height: 1.2;
+  margin-top: 0.5rem;
+}
+
+.gallery__title em {
+  font-style: italic;
+  color: var(--primary);
+}
+
+/* Grid — CSS grid with visual asymmetry */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 240px;
+  gap: 1rem;
+  grid-auto-flow: dense;
+}
+
+.gallery__item {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.gallery__item--tall {
+  grid-row: span 2;
+}
+
+.gallery__item--wide {
+  grid-column: span 2;
+}
+
+.gallery__item--normal {
+  grid-column: span 1;
+}
+
+/* Image wrapper */
+.gallery__img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.gallery__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.6s var(--ease);
+}
+
+.gallery__item:hover .gallery__img {
+  transform: scale(1.06);
+}
+
+/* Gradient fallbacks */
+.gallery__gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+
+.gallery__grad--atlas   { background: linear-gradient(145deg, #1E3D72, #2B5590, #4A7B9D, #8EB0C8); }
+.gallery__grad--village { background: linear-gradient(145deg, #8B6E5A, #A0522D, #C8502A, #D4733A); }
+.gallery__grad--craft   { background: linear-gradient(145deg, #1D5E40, #2E8A5E, #52B788, #74C69D); }
+.gallery__grad--desert  { background: linear-gradient(145deg, #C8920A, #D4A017, #E8C840, #F5E8A0); }
+.gallery__grad--souk    { background: linear-gradient(145deg, #5A3020, #8B4513, #C8502A, #E07550); }
+.gallery__grad--festival{ background: linear-gradient(145deg, #1A1A5E, #2B2B9A, #4A4ACA, #7070DD); }
+
+.gallery__grad-char {
+  font-size: 3rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* Hover overlay */
+.gallery__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(28,21,16,0.85) 0%,
+    rgba(28,21,16,0.1) 60%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.gallery__item:hover .gallery__overlay {
+  opacity: 1;
+}
+
+.gallery__overlay-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gallery__overlay-tifinagh {
+  font-size: 1.125rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.05em;
+}
+
+.gallery__overlay-label {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.gallery__overlay-sub {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
+}
+
+/* ── Cultural quote card ── */
+.gallery__quote {
+  overflow: hidden;
+}
+
+.gallery__quote-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #FEF9F2 0%, #F8EBD4 55%, #F0DCC0 100%);
+  border: 1.5px solid rgba(200, 80, 42, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-radius: inherit;
+}
+
+.gallery__quote-pattern {
+  position: absolute;
+  inset: 0;
+  background-size: 110px 110px;
+  background-repeat: repeat;
+  opacity: 0.055;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.gallery__quote-ornament {
+  position: absolute;
+  font-size: 0.5rem;
+  color: var(--primary);
+  opacity: 0.4;
+  line-height: 1;
+  user-select: none;
+}
+
+.gallery__quote-ornament--tl { top: 1rem;    left: 1rem;    }
+.gallery__quote-ornament--br { bottom: 1rem; right: 1rem;   }
+
+.gallery__quote-symbol {
+  position: absolute;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.75rem;
+  color: var(--primary);
+  opacity: 0.12;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0;
+}
+
+.gallery__quote-text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding-top: 0.75rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.0625rem, 2vw, 1.375rem);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.55;
+  max-width: 32ch;
+}
+
+.gallery__quote-text::before {
+  content: '\201C';
+  display: block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 3.25rem;
+  font-style: normal;
+  color: var(--primary);
+  opacity: 0.28;
+  line-height: 0.85;
+  margin-bottom: 0.5rem;
+}
+
+.gallery__quote-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gallery__quote-divider {
+  width: 36px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(200, 80, 42, 0.5), transparent);
+  margin-bottom: 0.1rem;
+}
+
+.gallery__quote-tifinagh {
+  font-size: 1rem;
+  color: var(--primary);
+  opacity: 0.7;
+  letter-spacing: 0.06em;
+}
+
+.gallery__quote-source {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gallery__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .gallery__item--tall,
+  .gallery__item--wide,
+  .gallery__item--normal {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .gallery__img-wrap {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery__img-wrap {
+    height: 220px;
+  }
+
+  .gallery__overlay {
+    opacity: 1;
+  }
+
+  .gallery__quote-inner {
+    min-height: 220px;
+    padding: 1.5rem;
+  }
+
+  .gallery__quote-text {
+    font-size: 1rem;
+  }
+}
