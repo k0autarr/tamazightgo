@@ -1,20 +1,23 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   JourneyHero — Amazigh Learning Path
-   Avatar column (left, dark) + Cultural journey path (right, light)
+   JourneyHero — Amazigh Cultural Learning Path
+   Left: dark avatar column · Right: SVG winding game-map path
    ───────────────────────────────────────────────────────────────────────────── */
 
 .jhero {
   display: grid;
   grid-template-columns: 290px 1fr;
   border-radius: var(--radius-xl);
-  box-shadow: 0 4px 32px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.14),
+    0 2px 8px  rgba(0,0,0,0.08);
   overflow: hidden;
   margin-bottom: 1.5rem;
+  min-height: 680px;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Avatar Column (left — dark gradient, dynamic per stage)
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   AVATAR COLUMN (left — dark gradient, dynamic per stage)
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 .jhero__avatar-col {
   position: relative;
@@ -25,35 +28,33 @@
   overflow: hidden;
 }
 
-/* Floating Tifinagh background characters */
+/* Floating Tifinagh BG symbols */
 .jhero__bg-chars {
   position: absolute;
   inset: 0;
   pointer-events: none;
   user-select: none;
 }
-
 .jhero__bg-char {
   position: absolute;
   color: rgba(255,255,255,0.045);
   font-family: var(--font-body);
   line-height: 1;
 }
+.jhero__bg-char--1 { font-size: 5.5rem; top: -12px;  left: -8px;  }
+.jhero__bg-char--2 { font-size: 4.5rem; top: 22%;    right: -6px; }
+.jhero__bg-char--3 { font-size: 3rem;   top: 48%;    left: 8px;   color: rgba(255,255,255,0.03); }
+.jhero__bg-char--4 { font-size: 4rem;   bottom: 22%; right: 12px; }
+.jhero__bg-char--5 { font-size: 5rem;   bottom: 4%;  left: 15%;   color: rgba(255,255,255,0.025); }
+.jhero__bg-char--6 { font-size: 3.5rem; top: 38%;    left: 55%;   }
+.jhero__bg-char--7 { font-size: 2.5rem; top: 70%;    left: 10px;  }
 
-.jhero__bg-char--1 { font-size: 5.5rem; top: -12px;  left: -8px;   }
-.jhero__bg-char--2 { font-size: 4.5rem; top: 22%;    right: -6px;  }
-.jhero__bg-char--3 { font-size: 3rem;   top: 48%;    left: 8px;    color: rgba(255,255,255,0.03); }
-.jhero__bg-char--4 { font-size: 4rem;   bottom: 22%; right: 12px;  }
-.jhero__bg-char--5 { font-size: 5rem;   bottom: 4%;  left: 15%;    color: rgba(255,255,255,0.025); }
-.jhero__bg-char--6 { font-size: 3.5rem; top: 38%;    left: 55%;    }
-.jhero__bg-char--7 { font-size: 2.5rem; top: 70%;    left: 10px;   }
-
-/* Geometric zellige-inspired pattern overlay */
+/* Zellige-inspired geometric overlay */
 .jhero__geo {
   position: absolute;
   inset: 0;
   background-image:
-    repeating-linear-gradient(45deg,  rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px),
+    repeating-linear-gradient( 45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px),
     repeating-linear-gradient(-45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px);
   pointer-events: none;
 }
@@ -85,7 +86,6 @@
   border: 1.5px dashed rgba(255,255,255,0.18);
   animation: spin-slow 20s linear infinite;
 }
-
 .jhero__ring-spin::before {
   content: '◆';
   position: absolute;
@@ -101,31 +101,33 @@
   height: 120px;
   border-radius: 50%;
   border: 2.5px solid;
-  background: rgba(0,0,0,0.32);
+  background: rgba(0,0,0,0.28);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   position: relative;
   overflow: hidden;
 }
-
 .jhero__circle-pattern {
   position: absolute;
   inset: 0;
   background-image: repeating-conic-gradient(
-    rgba(255,255,255,0.05) 0deg 30deg,
+    rgba(255,255,255,0.04) 0deg 30deg,
     transparent 30deg 60deg
   );
 }
 
-.jhero__char {
+/* Amazigh woman avatar inside the circle */
+.jhero__woman-avatar {
   position: relative;
   z-index: 1;
-  font-size: 3.5rem;
-  color: rgba(255,255,255,0.93);
-  font-family: var(--font-body);
-  animation: float 3.5s ease-in-out infinite;
-  line-height: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  animation: float 3.8s ease-in-out infinite;
+  padding-bottom: 2px;
 }
 
 /* Stage progress dots */
@@ -135,7 +137,6 @@
   gap: 7px;
   margin-bottom: 1.25rem;
 }
-
 .jhero__dot {
   width: 8px;
   height: 8px;
@@ -145,15 +146,8 @@
   transition: all 0.4s;
   cursor: default;
 }
-
-.jhero__dot--done { border-color: transparent; }
-
-.jhero__dot--active {
-  width: 13px;
-  height: 13px;
-  border-width: 2px;
-  box-shadow: 0 0 8px currentColor;
-}
+.jhero__dot--done   { border-color: transparent; }
+.jhero__dot--active { width: 13px; height: 13px; border-width: 2px; box-shadow: 0 0 8px currentColor; }
 
 /* Stage text */
 .jhero__stage-label {
@@ -164,7 +158,6 @@
   color: rgba(255,255,255,0.38);
   margin-bottom: 0.3rem;
 }
-
 .jhero__stage-name {
   font-family: var(--font-heading);
   font-size: 1.1875rem;
@@ -174,7 +167,6 @@
   margin-bottom: 0.2rem;
   line-height: 1.2;
 }
-
 .jhero__stage-amazigh {
   font-size: 0.75rem;
   color: rgba(255,255,255,0.4);
@@ -184,38 +176,13 @@
 }
 
 /* XP bar */
-.jhero__xp { width: 100%; margin-bottom: 1.25rem; }
-
-.jhero__xp-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-size: 0.7rem;
-  margin-bottom: 0.375rem;
-}
-
-.jhero__xp-key { color: rgba(255,255,255,0.38); font-weight: 600; letter-spacing: 0.04em; }
-.jhero__xp-val { color: rgba(255,255,255,0.82); font-weight: 700; }
-
-.jhero__xp-track {
-  height: 6px;
-  background: rgba(255,255,255,0.1);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-}
-
-.jhero__xp-fill {
-  height: 100%;
-  border-radius: var(--radius-full);
-  transition: width 0.9s var(--ease-out);
-}
-
-.jhero__xp-hint {
-  margin-top: 0.3rem;
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.28);
-  text-align: right;
-}
+.jhero__xp          { width: 100%; margin-bottom: 1.25rem; }
+.jhero__xp-row      { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.7rem; margin-bottom: 0.375rem; }
+.jhero__xp-key      { color: rgba(255,255,255,0.38); font-weight: 600; letter-spacing: 0.04em; }
+.jhero__xp-val      { color: rgba(255,255,255,0.82); font-weight: 700; }
+.jhero__xp-track    { height: 6px; background: rgba(255,255,255,0.1); border-radius: var(--radius-full); overflow: hidden; }
+.jhero__xp-fill     { height: 100%; border-radius: var(--radius-full); transition: width 0.9s var(--ease-out); }
+.jhero__xp-hint     { margin-top: 0.3rem; font-size: 0.65rem; color: rgba(255,255,255,0.28); text-align: right; }
 
 /* Mini stats bar */
 .jhero__mini-stats {
@@ -228,549 +195,360 @@
   padding: 0.75rem 0;
   margin-top: auto;
 }
+.jhero__mini-stat  { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+.jhero__mini-val   { font-family: var(--font-heading); font-size: 0.9375rem; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1; }
+.jhero__mini-lbl   { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.32); }
+.jhero__mini-sep   { width: 1px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
 
-.jhero__mini-stat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-}
-
-.jhero__mini-val {
-  font-family: var(--font-heading);
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: rgba(255,255,255,0.9);
-  line-height: 1;
-}
-
-.jhero__mini-lbl {
-  font-size: 0.58rem;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: rgba(255,255,255,0.32);
-}
-
-.jhero__mini-sep {
-  width: 1px;
-  background: rgba(255,255,255,0.1);
-  flex-shrink: 0;
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   Journey Path Column (right — light, cream/white background)
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   PATH COLUMN (right — warm desert/cream tones)
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 .jhero__path-col {
-  background: var(--white);
-  padding: 1.875rem 2rem;
+  position: relative;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(160deg, #FEF7EC 0%, #F5E8CE 60%, #EDD9B2 100%);
   overflow: hidden;
-  position: relative;
 }
 
-/* Amazigh pattern texture overlay — subtle, low opacity */
+/* Atlas mountain photo — very faint, bottom-anchored */
 .jhero__path-texture {
   position: absolute;
   inset: 0;
-  background-size: 140px 140px;
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+
+/* Amazigh pattern — tile, very faint */
+.jhero__path-pattern-overlay {
+  position: absolute;
+  inset: 0;
+  background-size: 120px 120px;
   background-repeat: repeat;
-  opacity: 0.025;
+  opacity: 0.022;
   pointer-events: none;
   z-index: 0;
 }
 
-/* All content inside must be above the texture */
+/* Header + strip + map must sit above textures */
 .jhero__path-header,
-.jhero__path-pattern,
-.jhero__milestones {
+.jhero__path-tifi-strip,
+.jhero__map-wrap {
   position: relative;
   z-index: 1;
 }
 
-/* Header */
+/* ── Path column header ── */
 .jhero__path-header {
   display: flex;
   align-items: flex-start;
   gap: 0.875rem;
-  margin-bottom: 0.75rem;
+  padding: 1.625rem 1.875rem 0.625rem;
 }
+.jhero__path-aza   { font-size: 2.25rem; color: var(--primary); line-height: 1; flex-shrink: 0; margin-top: -2px; opacity: 0.85; }
+.jhero__path-title { font-family: var(--font-heading); font-size: 1.125rem; font-weight: 600; color: var(--dark); margin-bottom: 0.2rem; }
+.jhero__path-sub   { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 
-.jhero__path-aza {
-  font-size: 2.25rem;
-  color: var(--primary);
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: -2px;
-  opacity: 0.85;
-}
-
-.jhero__path-title {
-  font-family: var(--font-heading);
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--dark);
-  margin-bottom: 0.2rem;
-}
-
-.jhero__path-sub {
-  font-size: 0.8rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-/* Decorative Tifinagh runner strip */
-.jhero__path-pattern {
+/* Tifinagh decorative strip */
+.jhero__path-tifi-strip {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   font-size: 0.75rem;
-  color: var(--sand-dark);
-  letter-spacing: 0.5em;
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--sand);
-  border-bottom: 1px solid var(--sand);
-  margin-bottom: 1.5rem;
+  color: #9B7A50;
+  letter-spacing: 0.45em;
+  padding: 0.45rem 1.875rem;
+  border-top: 1px solid rgba(200,176,138,0.4);
+  border-bottom: 1px solid rgba(200,176,138,0.4);
+  margin-bottom: 0;
   overflow: hidden;
+  opacity: 0.7;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Milestones
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAP WRAP — SVG path + level info cards
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-.jhero__milestones {
-  display: flex;
-  flex-direction: column;
+.jhero__map-wrap {
+  display: grid;
+  grid-template-columns: 1fr 320px;
   flex: 1;
+  min-height: 0;
   gap: 0;
 }
 
-/* Single milestone row */
-.jhero__ms {
-  display: flex;
-  align-items: stretch;
-  gap: 1rem;
-  transition: opacity 0.3s;
+/* The SVG game map */
+.jhero__map-svg {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  display: block;
+  padding: 0.5rem 0.25rem 1rem;
 }
 
-/* Alternating indent creates a subtle winding-road feel */
-.jhero__ms--indent {
-  padding-left: 2rem;
+/* Animated dashed segment on active path */
+.jhero__path-dash {
+  stroke-dashoffset: 0;
+  animation: dash-flow 1.8s linear infinite;
 }
 
-.jhero__ms:hover:not(.jhero__ms--locked) .jhero__ms-body {
-  opacity: 0.95;
-}
-
-/* ── Left column: icon pill + node + connector ── */
-.jhero__ms-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  width: 54px; /* matches node size */
-}
-
-/* Cultural icon pill floating above the node */
-.jhero__ms-icon-pill {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-  margin-bottom: 5px;
-  width: 54px;
-}
-
-.jhero__ms-icon-emoji {
-  font-size: 1.375rem;
-  line-height: 1;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12));
-}
-
-.jhero__ms-icon-tifi {
-  font-size: 0.6rem;
-  color: var(--sand-dark);
-  letter-spacing: 0.05em;
-  font-weight: 700;
-  line-height: 1;
-  transition: color 0.4s;
-}
-
-/* Locked milestones: mute icon */
-.jhero__ms-icon-pill--locked {
-  opacity: 0.3;
-  filter: grayscale(1);
-}
-
-/* ── Main circular node ── */
-.jhero__ms-node {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  border: 2.5px solid var(--sand-dark);
-  background: var(--white);
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  z-index: 1;
-  transition: all 0.5s var(--ease);
-  overflow: visible;
-}
-
-/* Completed node: filled background via inline style */
-.jhero__ms-node--completed {
-  /* border + background set via inline style */
-}
-
-/* Active node: glowing border via inline style */
-.jhero__ms-node--active {
-  /* styled via inline style */
-}
-
-/* Locked node: muted look */
-.jhero__ms-node--locked {
-  background: var(--sand);
-  border-color: var(--sand-dark);
-  opacity: 0.55;
-}
-
-/* ✓ checkmark inside completed node */
-.jhero__ms-checkmark {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1;
-}
-
-/* Avatar Tifinagh character on active node */
-.jhero__ms-avatar-char {
-  font-size: 1.625rem;
-  font-weight: 700;
-  font-family: var(--font-body);
-  line-height: 1;
-  position: relative;
-  z-index: 2;
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Lock icon for locked nodes */
-.jhero__ms-padlock {
-  font-size: 1rem;
-  line-height: 1;
-}
-
-/* Pulsing ring on active node */
-.jhero__ms-pulse {
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
+/* Pulse ring on active node */
+.jhero__node-pulse-ring {
   animation: pulse-ring 2.4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
+  transform-origin: center;
+  transform-box: fill-box;
 }
 
-/* "YOU" badge under active node */
-.jhero__you {
-  font-size: 0.475rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: white;
-  padding: 0.18rem 0.5rem;
-  border-radius: var(--radius-full);
-  margin-top: 4px;
-  white-space: nowrap;
-  z-index: 1;
-  flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+/* Avatar foreignObject on active node */
+.jhero__node-avatar-fo {
+  overflow: visible;
+  animation: float 3.2s ease-in-out infinite;
 }
 
-/* Vertical connector line */
-.jhero__ms-line {
-  flex: 1;
-  width: 3px;
-  min-height: 16px;
-  border-radius: 2px;
-  transition: background 0.6s;
-  margin: 4px 0;
-  align-self: stretch;
+/* ═══════════════════════════════════════════════════════════════════════════
+   LEVEL INFO CARDS (right side of map grid, or stacked on mobile)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.jhero__level-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem 1rem 0.5rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200,176,138,0.4) transparent;
 }
 
-.jhero__ms-line--done {
-  /* background set via inline style */
+.jhero__lcard {
+  background: rgba(255,252,245,0.82);
+  border: 1.5px solid rgba(200,176,138,0.3);
+  border-radius: 12px;
+  padding: 0.75rem 0.875rem;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  backdrop-filter: blur(4px);
+}
+.jhero__lcard:hover:not(.jhero__lcard--locked) {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
 }
 
-.jhero__ms-line--locked {
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--sand-dark) 0px, var(--sand-dark) 5px,
-    transparent 5px, transparent 11px
-  );
+.jhero__lcard--locked {
+  opacity: 0.52;
+  filter: grayscale(0.4);
 }
 
-/* ── Milestone content body ── */
-.jhero__ms-body {
-  flex: 1;
-  padding-bottom: 1.375rem;
-  transition: opacity 0.3s;
-  min-width: 0;
-}
-
-.jhero__ms:last-child .jhero__ms-body { padding-bottom: 0; }
-
-/* Locked body: reduced opacity */
-.jhero__ms--locked .jhero__ms-body { opacity: 0.42; }
-
-/* Level chip + status row */
-.jhero__ms-head {
+/* Card header row */
+.jhero__lcard-top {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.3rem;
 }
 
-.jhero__ms-lv {
+.jhero__lcard-lv {
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--muted);
-  background: var(--sand);
+  background: rgba(200,176,138,0.25);
   padding: 0.18rem 0.55rem;
   border-radius: var(--radius-full);
+  white-space: nowrap;
   transition: all 0.4s;
 }
 
-.jhero__ms-status {
-  font-size: 0.68rem;
+.jhero__lcard-badge {
+  font-size: 0.66rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
 }
+.jhero__lcard-badge--completed { color: var(--green); }
+.jhero__lcard-badge--active    { color: var(--primary); }
+.jhero__lcard-badge--locked    { color: var(--muted); }
 
-.jhero__ms-status--completed { color: var(--green); }
-.jhero__ms-status--active    { color: var(--primary); }
-.jhero__ms-status--locked    { color: var(--muted); }
-
-/* Name + Amazigh sub-name */
-.jhero__ms-row {
-  margin-bottom: 0.15rem;
-}
-
-.jhero__ms-name {
+/* Level name */
+.jhero__lcard-name {
   font-family: var(--font-heading);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--dark);
-  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.1rem;
 }
+.jhero__lcard-icon { font-size: 0.9rem; line-height: 1; }
 
-.jhero__ms-name--locked { color: var(--muted); }
-
-.jhero__ms-sub {
-  font-size: 0.7rem;
+/* Amazigh sub-name */
+.jhero__lcard-sub {
+  font-size: 0.68rem;
   color: var(--muted);
-  margin-top: 0.1rem;
-  margin-bottom: 0.15rem;
-}
-
-/* Cultural theme description */
-.jhero__ms-theme {
-  font-size: 0.7rem;
-  color: var(--medium);
+  margin-bottom: 0.4rem;
   font-style: italic;
-  margin-bottom: 0.45rem;
 }
 
 /* Topic tags */
-.jhero__ms-topics {
+.jhero__lcard-topics {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 0.55rem;
+  gap: 0.25rem;
+  margin-bottom: 0.45rem;
 }
-
-.jhero__ms-topic {
-  font-size: 0.6rem;
+.jhero__lcard-topic {
+  font-size: 0.58rem;
   font-weight: 500;
-  padding: 0.16rem 0.5rem;
+  padding: 0.14rem 0.45rem;
   border-radius: var(--radius-full);
   border: 1px solid;
   letter-spacing: 0.02em;
   transition: all 0.3s;
 }
 
-/* Lesson progress bar */
-.jhero__ms-progress {
+/* Progress bar */
+.jhero__lcard-bar-row {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: 0.5rem;
 }
-
-.jhero__ms-bar {
+.jhero__lcard-bar {
   flex: 1;
   height: 4px;
-  background: var(--sand);
+  background: rgba(200,176,138,0.3);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
-
-.jhero__ms-fill {
+.jhero__lcard-fill {
   height: 100%;
   border-radius: var(--radius-full);
   transition: width 0.9s var(--ease-out);
 }
-
-.jhero__ms-count {
-  font-size: 0.7rem;
-  color: var(--muted);
-  white-space: nowrap;
-  font-weight: 500;
-}
-
-.jhero__ms-locked-hint {
+.jhero__lcard-count {
   font-size: 0.68rem;
   color: var(--muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Locked hint */
+.jhero__lcard-locked {
+  font-size: 0.66rem;
+  color: var(--muted);
   font-style: italic;
+  margin: 0;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Summit / Final Reward Badge
-   ───────────────────────────────────────────────────────────────────────────── */
-
-.jhero__summit {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 0.625rem;
-  padding: 0.875rem 1.125rem;
-  border-radius: var(--radius-lg);
-  background: var(--sand);
-  border: 1.5px dashed var(--sand-dark);
-  opacity: 0.55;
-  transition: all 0.6s var(--ease);
+/* Summit card */
+.jhero__lcard--summit {
+  background: rgba(255,252,245,0.6);
+  border-style: dashed;
+  border-color: rgba(200,176,138,0.4);
+  opacity: 0.6;
 }
-
-.jhero__summit--done {
-  background: linear-gradient(135deg, #FEF9F2 0%, #F8EBD4 100%);
+.jhero__lcard--summit-done {
+  background: linear-gradient(135deg, #FEF9F2, #F8EBD4);
   border: 1.5px solid rgba(200,146,10,0.35);
   opacity: 1;
-  box-shadow: 0 4px 24px rgba(200,146,10,0.14), 0 1px 4px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(200,146,10,0.12);
 }
-
-.jhero__summit-node {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: var(--white);
-  border: 2px dashed var(--sand-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.6s var(--ease);
-}
-
-.jhero__summit--done .jhero__summit-node {
-  border-style: solid;
-  box-shadow: 0 0 0 5px rgba(212,160,23,0.18), 0 4px 18px rgba(212,160,23,0.35);
-}
-
-.jhero__summit-icon {
-  font-size: 1.625rem;
+.jhero__summit-icon-badge {
+  font-size: 1.25rem;
   line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 
-.jhero__summit-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.jhero__summit-title {
-  font-family: var(--font-heading);
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 0.2rem;
-}
-
-.jhero__summit--done .jhero__summit-title {
-  color: #8B6A00;
-}
-
-.jhero__summit-sub {
-  font-size: 0.7rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   Animations
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @keyframes pulse-ring {
-  0%   { opacity: 0.7; transform: scale(0.95); }
-  50%  { opacity: 0.25; transform: scale(1.08); }
-  100% { opacity: 0.7; transform: scale(0.95); }
+  0%   { opacity: 0.7;  transform: scale(0.95); }
+  50%  { opacity: 0.22; transform: scale(1.12); }
+  100% { opacity: 0.7;  transform: scale(0.95); }
 }
 
-/* spin-slow and float are defined globally in App.css / index.css */
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   Responsive
-   ───────────────────────────────────────────────────────────────────────────── */
-
-@media (max-width: 1000px) {
-  .jhero { grid-template-columns: 260px 1fr; }
+@keyframes dash-flow {
+  from { stroke-dashoffset: 0;   }
+  to   { stroke-dashoffset: -36; }
 }
 
-@media (max-width: 800px) {
+/* float + spin-slow defined globally in App.css / index.css */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Narrow desktop — collapse level cards column */
+@media (max-width: 1100px) {
+  .jhero { grid-template-columns: 270px 1fr; }
+
+  .jhero__map-wrap {
+    grid-template-columns: 1fr 260px;
+  }
+}
+
+/* Tablet — hide level cards sidebar, keep map */
+@media (max-width: 900px) {
+  .jhero { grid-template-columns: 240px 1fr; }
+
+  .jhero__map-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  /* Cards move below the map on tablet */
+  .jhero__level-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 1rem 1rem;
+    gap: 0.5rem;
+    overflow-y: visible;
+    overflow-x: auto;
+  }
+
+  .jhero__lcard {
+    min-width: 160px;
+    flex: 1 1 160px;
+  }
+
+  .jhero__map-svg { min-height: 480px; }
+}
+
+/* Mobile — stack avatar above path */
+@media (max-width: 700px) {
   .jhero {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
+    min-height: unset;
   }
 
-  .jhero__avatar-col { padding: 1.75rem 1.5rem 1.25rem; }
+  .jhero__avatar-col {
+    padding: 1.75rem 1.5rem 1.25rem;
+  }
+
   .jhero__circle     { width: 96px;  height: 96px;  }
   .jhero__ring-spin  { width: 120px; height: 120px; }
   .jhero__ring-glow  { width: 96px;  height: 96px;  }
   .jhero__avatar-wrap { width: 120px; height: 120px; }
-  .jhero__char        { font-size: 2.75rem; }
-  .jhero__mini-stats  { flex-wrap: wrap; gap: 0; }
+  .jhero__mini-stats { flex-wrap: wrap; gap: 0; }
 
-  .jhero__path-col { padding: 1.5rem; }
+  .jhero__path-header { padding: 1.25rem 1.25rem 0.5rem; }
+  .jhero__path-tifi-strip { padding: 0.4rem 1.25rem; }
 
-  /* Smaller nodes on mobile */
-  .jhero__ms-node,
-  .jhero__ms-left,
-  .jhero__ms-icon-pill,
-  .jhero__summit-node { width: 46px; height: 46px; }
+  .jhero__map-svg { min-height: 420px; }
 
-  .jhero__ms-avatar-char { font-size: 1.375rem; }
-  .jhero__ms-checkmark   { font-size: 1.125rem; }
-
-  /* Reduce winding indent on tablet */
-  .jhero__ms--indent { padding-left: 1.25rem; }
+  .jhero__level-cards {
+    padding: 0 0.75rem 0.75rem;
+  }
+  .jhero__lcard {
+    min-width: 140px;
+  }
 }
 
-@media (max-width: 480px) {
-  .jhero__path-col { padding: 1.25rem; }
+@media (max-width: 420px) {
   .jhero__path-header { gap: 0.5rem; }
   .jhero__path-aza    { font-size: 1.75rem; }
-
-  /* Remove indent on small phones — path is narrow enough */
-  .jhero__ms--indent { padding-left: 0; }
-
-  .jhero__ms-node,
-  .jhero__ms-left,
-  .jhero__ms-icon-pill,
-  .jhero__summit-node { width: 42px; height: 42px; }
-
-  .jhero__ms { gap: 0.75rem; }
-
-  .jhero__ms-topics { display: none; } /* hide topic tags to save space */
+  .jhero__map-svg     { min-height: 380px; }
+  .jhero__lcard-topics { display: none; }
 }
